@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Visualizzatore 3D</title>
+  <title>Visualizzatore GLB</title>
   <style>
     body { margin: 0; overflow: hidden; }
     canvas { display: block; }
@@ -23,13 +23,13 @@
     scene.add(light);
 
     const loader = new GLTFLoader();
-    loader.load('modello.glb', function (gltf) {
+    loader.load('./modello.glb', function (gltf) {
       scene.add(gltf.scene);
     }, undefined, function (error) {
       console.error('Errore nel caricamento:', error);
     });
 
-    camera.position.z = 5;
+    camera.position.z = 3;
 
     function animate() {
       requestAnimationFrame(animate);
