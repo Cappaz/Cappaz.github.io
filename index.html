@@ -3,12 +3,16 @@
   <head>
     <meta charset="UTF-8" />
     <title>GLB Viewer</title>
-    <style>body { margin: 0; }</style>
+    <style>
+      body { margin: 0; overflow: hidden; }
+      canvas { display: block; }
+    </style>
   </head>
   <body>
-    <script src="https://cdn.jsdelivr.net/npm/three@0.150.1/build/three.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/three@0.150.1/examples/js/loaders/GLTFLoader.js"></script>
-    <script>
+    <script type="module">
+      import * as THREE from 'https://unpkg.com/three@0.155.0/build/three.module.js';
+      import { GLTFLoader } from 'https://unpkg.com/three@0.155.0/examples/jsm/loaders/GLTFLoader.js';
+
       const scene = new THREE.Scene();
       const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
       const renderer = new THREE.WebGLRenderer({ antialias: true });
@@ -16,15 +20,15 @@
       document.body.appendChild(renderer.domElement);
 
       const light = new THREE.HemisphereLight(0xffffff, 0x444444);
-      light.position.set(0, 20, 0);
       scene.add(light);
 
-      const loader = new THREE.GLTFLoader();
+      const loader = new GLTFLoader();
       loader.load('modello.glb', function (gltf) {
         scene.add(gltf.scene);
       });
 
       camera.position.z = 5;
+
       function animate() {
         requestAnimationFrame(animate);
         renderer.render(scene, camera);
